@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "985336800133",
+    "firebase_url": "https://dicecardgame-default-rtdb.firebaseio.com",
     "project_id": "dicecardgame",
     "storage_bucket": "dicecardgame.appspot.com"
   },

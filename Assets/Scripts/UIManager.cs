@@ -9,7 +9,9 @@ public class UIManager : MonoBehaviour
     //Screen object variables
     public GameObject loginUI;
     public GameObject registerUI;
-    // Start is called before the first frame update
+    public GameObject userDataUI;
+    public GameObject scoreboardUI;
+
 
     private void Awake()
     {
@@ -23,15 +25,33 @@ public class UIManager : MonoBehaviour
             Destroy(this);
         }
     }
+    public void ClearScreen() //Turn off all screens
+    {
+        loginUI.SetActive(false);
+        registerUI.SetActive(false);
+        userDataUI.SetActive(false);
+        scoreboardUI.SetActive(false);
+    }
     public void LoginScreen()
     {
+        ClearScreen();
         loginUI.SetActive(true);
-        registerUI.SetActive(false);
     }
 
     public void ResisterScreen()
     {
-        loginUI.SetActive(false);
+        ClearScreen();
         registerUI.SetActive(true);
+    }
+    public void UserDataScreen() //Logged in
+    {
+        ClearScreen();
+        userDataUI.SetActive(true);
+    }
+
+    public void ScoreboardScreen() //Scoreboard button
+    {
+        ClearScreen();
+        scoreboardUI.SetActive(true);
     }
 }

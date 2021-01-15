@@ -638,8 +638,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 775673779}
-        m_MethodName: LoginScreen
+      - m_Target: {fileID: 249206485}
+        m_MethodName: SignOutButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -858,6 +858,13 @@ MonoBehaviour:
   passwordRegisterField: {fileID: 1156555689}
   passwordRegisterVerifyField: {fileID: 723234922}
   warningRegisterText: {fileID: 1280556187}
+  usernameField: {fileID: 1165819766}
+  xpField: {fileID: 1315266494}
+  killsField: {fileID: 1626945938}
+  deathsField: {fileID: 583598985}
+  scoreElement: {fileID: 8842236204726911551, guid: 03c2eae91371d274da42d6843f3f9b50,
+    type: 3}
+  scoreboardContent: {fileID: 2030424055}
 --- !u!4 &249206486
 Transform:
   m_ObjectHideFlags: 0
@@ -1233,7 +1240,7 @@ GameObject:
   - component: {fileID: 353375168}
   - component: {fileID: 353375167}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Username
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1569,8 +1576,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 775673779}
-        m_MethodName: LoginScreen
+      - m_Target: {fileID: 249206485}
+        m_MethodName: SignOutButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2196,8 +2203,8 @@ RectTransform:
   - {fileID: 1994875964}
   - {fileID: 1205610522}
   - {fileID: 313691359}
-  - {fileID: 1968041075}
   - {fileID: 1276995776}
+  - {fileID: 1968041075}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3182,7 +3189,7 @@ GameObject:
   - component: {fileID: 583598986}
   - component: {fileID: 583598985}
   m_Layer: 5
-  m_Name: Confirm_Input
+  m_Name: Deaths_Input
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3255,8 +3262,8 @@ MonoBehaviour:
   m_VerticalScrollbarEventHandler: {fileID: 0}
   m_LayoutGroup: {fileID: 0}
   m_ScrollSensitivity: 1
-  m_ContentType: 7
-  m_InputType: 2
+  m_ContentType: 0
+  m_InputType: 0
   m_AsteriskChar: 42
   m_KeyboardType: 0
   m_LineType: 0
@@ -3487,7 +3494,7 @@ GameObject:
   - component: {fileID: 701027560}
   - component: {fileID: 701027559}
   m_Layer: 5
-  m_Name: Username_Text (2)
+  m_Name: Deaths_Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3904,6 +3911,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   loginUI: {fileID: 1205610521}
   registerUI: {fileID: 313691358}
+  userDataUI: {fileID: 1968041074}
+  scoreboardUI: {fileID: 1276995775}
 --- !u!4 &775673780
 Transform:
   m_ObjectHideFlags: 0
@@ -4215,7 +4224,7 @@ GameObject:
   - component: {fileID: 824906488}
   - component: {fileID: 824906487}
   m_Layer: 5
-  m_Name: Username_Text (1)
+  m_Name: Kills_Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5271,7 +5280,7 @@ GameObject:
   - component: {fileID: 1049900576}
   - component: {fileID: 1049900575}
   m_Layer: 5
-  m_Name: Text (TMP) (1)
+  m_Name: Kills
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5475,7 +5484,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 249206485}
-        m_MethodName: RegisterButton
+        m_MethodName: SaveDataButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5707,8 +5716,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 775673779}
-        m_MethodName: LoginScreen
+      - m_Target: {fileID: 249206485}
+        m_MethodName: ScoreboardButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6570,7 +6579,7 @@ RectTransform:
   - {fileID: 1835353445}
   - {fileID: 2147127420}
   m_Father: {fileID: 434317071}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -6589,7 +6598,7 @@ GameObject:
   - component: {fileID: 1277060660}
   - component: {fileID: 1277060659}
   m_Layer: 5
-  m_Name: Username_Text
+  m_Name: XP_Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7123,7 +7132,7 @@ GameObject:
   - component: {fileID: 1315266495}
   - component: {fileID: 1315266494}
   m_Layer: 5
-  m_Name: Email_Input
+  m_Name: XP_Input
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7629,7 +7638,7 @@ GameObject:
   - component: {fileID: 1381402306}
   - component: {fileID: 1381402305}
   m_Layer: 5
-  m_Name: Text (TMP) (2)
+  m_Name: Death
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9581,7 +9590,7 @@ GameObject:
   - component: {fileID: 1626945939}
   - component: {fileID: 1626945938}
   m_Layer: 5
-  m_Name: Password_Input
+  m_Name: Kills_Input
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9654,8 +9663,8 @@ MonoBehaviour:
   m_VerticalScrollbarEventHandler: {fileID: 0}
   m_LayoutGroup: {fileID: 0}
   m_ScrollSensitivity: 1
-  m_ContentType: 7
-  m_InputType: 2
+  m_ContentType: 0
+  m_InputType: 0
   m_AsteriskChar: 42
   m_KeyboardType: 0
   m_LineType: 0
@@ -10160,7 +10169,7 @@ GameObject:
   - component: {fileID: 1834137323}
   - component: {fileID: 1834137322}
   m_Layer: 5
-  m_Name: Text (TMP) (3)
+  m_Name: XP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11657,7 +11666,7 @@ RectTransform:
   - {fileID: 585801182}
   - {fileID: 1093952801}
   m_Father: {fileID: 434317071}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -12013,6 +12022,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2030424055}
+  - component: {fileID: 2030424057}
+  - component: {fileID: 2030424056}
   m_Layer: 5
   m_Name: Content
   m_TagString: Untagged
@@ -12039,6 +12050,45 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
+--- !u!114 &2030424056
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2030424054}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_HorizontalFit: 0
+  m_VerticalFit: 2
+--- !u!114 &2030424057
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2030424054}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59f8146938fff824cb5fd77236b75775, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding:
+    m_Left: 0
+    m_Right: 0
+    m_Top: 0
+    m_Bottom: 0
+  m_ChildAlignment: 0
+  m_Spacing: -35
+  m_ChildForceExpandWidth: 1
+  m_ChildForceExpandHeight: 1
+  m_ChildControlWidth: 1
+  m_ChildControlHeight: 1
+  m_ChildScaleWidth: 0
+  m_ChildScaleHeight: 0
 --- !u!1 &2099663062
 GameObject:
   m_ObjectHideFlags: 0

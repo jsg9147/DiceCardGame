@@ -6,6 +6,7 @@ using Firebase.Auth;
 using Firebase.Database;
 using TMPro;
 using System.Linq;
+using UnityEngine.SceneManagement;
 
 public class FirebaseManager : MonoBehaviour
 {
@@ -38,8 +39,20 @@ public class FirebaseManager : MonoBehaviour
     public GameObject scoreElement;
     public Transform scoreboardContent;
 
+    public string username;
+
+    public static FirebaseManager instance;
+
+    public string GetUsername()
+    {
+        string userN = username;
+        return userN;
+    }
+    
+
     void Awake()
     {
+        instance = this;
         //Check that all of the necessary dependencies for Firebase are present on the system
         FirebaseApp.CheckAndFixDependenciesAsync().ContinueWith(task =>
         {
@@ -54,6 +67,18 @@ public class FirebaseManager : MonoBehaviour
                 Debug.LogError("Could not resolve all Firebase dependencies: " + dependencyStatus);
             }
         });
+
+        var obj = FindObjectsOfType<FirebaseManager>();
+
+        if (obj.Length == 1)
+        {
+            DontDestroyOnLoad(gameObject);
+        }
+
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void InitializeFirebase()
@@ -159,11 +184,14 @@ public class FirebaseManager : MonoBehaviour
 
             yield return new WaitForSeconds(2);
 
+            username = User.DisplayName;
             usernameField.text = User.DisplayName;
             UIManager.instance.UserDataScreen(); // Change to user data UI
             confirmLoginText.text = "";
             ClearLoginFeilds();
             ClearRegisterFeilds();
+
+            SceneManager.LoadScene("Lobby");
         }
     }
 

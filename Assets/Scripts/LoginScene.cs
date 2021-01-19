@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class LoginScene : MonoBehaviour
+public class LoginScene : BaseScene
 {
     public void LoginButton()
     {

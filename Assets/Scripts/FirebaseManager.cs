@@ -39,7 +39,11 @@ public class FirebaseManager : MonoBehaviour
     public GameObject scoreElement;
     public Transform scoreboardContent;
 
+    public PhotonManager photonManager;
+
     public string username;
+    private bool connected;
+
 
     public static FirebaseManager instance;
 
@@ -48,11 +52,16 @@ public class FirebaseManager : MonoBehaviour
         string userN = username;
         return userN;
     }
-    
+
+    public bool GetConnected()
+    {
+        return connected;
+    }
 
     void Awake()
     {
         instance = this;
+        connected = false;
         //Check that all of the necessary dependencies for Firebase are present on the system
         FirebaseApp.CheckAndFixDependenciesAsync().ContinueWith(task =>
         {
@@ -190,6 +199,10 @@ public class FirebaseManager : MonoBehaviour
             confirmLoginText.text = "";
             ClearLoginFeilds();
             ClearRegisterFeilds();
+
+            connected = true;
+
+            photonManager.Connect();
 
             SceneManager.LoadScene("Lobby");
         }

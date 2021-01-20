@@ -865,6 +865,8 @@ MonoBehaviour:
   scoreElement: {fileID: 8842236204726911551, guid: 03c2eae91371d274da42d6843f3f9b50,
     type: 3}
   scoreboardContent: {fileID: 2030424055}
+  photonManager: {fileID: 2718584524202336370, guid: 4e018324bd037ae4a97087ec1597db46,
+    type: 3}
   username: 
 --- !u!4 &249206486
 Transform:
@@ -3021,6 +3023,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e2d6a1ac9bfb134d9a491054f845627, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PhotonManager: {fileID: 2718584524202336368, guid: 4e018324bd037ae4a97087ec1597db46,
+    type: 3}
 --- !u!4 &524009961
 Transform:
   m_ObjectHideFlags: 0
@@ -3526,36 +3530,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 585801181}
   m_CullTransparentMesh: 0
---- !u!1 &624291833
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 624291834}
-  m_Layer: 0
-  m_Name: PhotonManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &624291834
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 624291833}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 402, y: 226, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 7
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &701027557
 GameObject:
   m_ObjectHideFlags: 0

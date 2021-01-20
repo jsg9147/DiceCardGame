@@ -9,7 +9,26 @@ using Photon.Realtime;
 public class PhotonManager : MonoBehaviourPunCallbacks
 {
     public Text StatusText;
-    public InputField roomInput, NickNameInput;
+    public string roomInput, NickNameInput;
+
+    private void Awake()
+    {
+        var obj = FindObjectsOfType<PhotonManager>();
+
+        if (obj.Length == 1)
+        {
+            DontDestroyOnLoad(gameObject);
+        }
+
+        else
+        {
+            Destroy(gameObject);
+        }
+
+        //임시 값 부여
+        roomInput = "방이름";
+        NickNameInput = "닉넴";
+    }
     public void Connect() => PhotonNetwork.ConnectUsingSettings();
 
     public override void OnConnectedToMaster()
@@ -33,11 +52,11 @@ public class PhotonManager : MonoBehaviourPunCallbacks
 
 
 
-    public void CreateRoom() => PhotonNetwork.CreateRoom(roomInput.text, new RoomOptions { MaxPlayers = 2 });
+    public void CreateRoom() => PhotonNetwork.CreateRoom(roomInput, new RoomOptions { MaxPlayers = 2 });
 
-    public void JoinRoom() => PhotonNetwork.JoinRoom(roomInput.text);
+    public void JoinRoom() => PhotonNetwork.JoinRoom(roomInput);
 
-    public void JoinOrCreateRoom() => PhotonNetwork.JoinOrCreateRoom(roomInput.text, new RoomOptions { MaxPlayers = 2 }, null);
+    public void JoinOrCreateRoom() => PhotonNetwork.JoinOrCreateRoom(roomInput, new RoomOptions { MaxPlayers = 2 }, null);
 
     public void JoinRandomRoom() => PhotonNetwork.JoinRandomRoom();
 

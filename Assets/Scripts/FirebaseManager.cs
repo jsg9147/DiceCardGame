@@ -195,7 +195,7 @@ public class FirebaseManager : MonoBehaviour
 
             username = User.DisplayName;
             usernameField.text = User.DisplayName;
-            UIManager.instance.UserDataScreen(); // Change to user data UI
+            UIManager.instance.LobbyScreen(); // Change to user data UI
             confirmLoginText.text = "";
             ClearLoginFeilds();
             ClearRegisterFeilds();
@@ -204,7 +204,6 @@ public class FirebaseManager : MonoBehaviour
 
             photonManager.Connect();
 
-            SceneManager.LoadScene("Lobby");
         }
     }
 

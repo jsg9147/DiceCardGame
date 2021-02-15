@@ -11,7 +11,8 @@ public class UIManager : MonoBehaviour
     public GameObject registerUI;
     public GameObject userDataUI;
     public GameObject scoreboardUI;
-
+    public GameObject lobbyUI;
+    public GameObject roomUI;
 
     private void Awake()
     {
@@ -31,6 +32,8 @@ public class UIManager : MonoBehaviour
         registerUI.SetActive(false);
         userDataUI.SetActive(false);
         scoreboardUI.SetActive(false);
+        lobbyUI.SetActive(false);
+        roomUI.SetActive(false);
     }
     public void LoginScreen()
     {
@@ -53,5 +56,17 @@ public class UIManager : MonoBehaviour
     {
         ClearScreen();
         scoreboardUI.SetActive(true);
+    }
+
+    public void LobbyScreen() //Scoreboard button
+    {
+        ClearScreen();
+        lobbyUI.SetActive(true);
+    }
+
+    public void RoomScreen() //Scoreboard button
+    {
+        ClearScreen();
+        lobbyUI.SetActive(true);
     }
 }

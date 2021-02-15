@@ -9,12 +9,12 @@ public class LoginScene : BaseScene
 
     private void Awake()
     {
-        Instantiate(PhotonManager);
+
     }
 
     public void LoginButton()
     {
-        SceneManager.LoadScene("Lobby");
+        
     }
     
 }

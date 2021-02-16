@@ -16,6 +16,6 @@ public class BaseScene : MonoBehaviour
 
     private void Awake()
     {
-
+        Screen.SetResolution(960, 540, false);
     }
 }

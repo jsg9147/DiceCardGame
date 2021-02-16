@@ -67,6 +67,6 @@ public class UIManager : MonoBehaviour
     public void RoomScreen() //Scoreboard button
     {
         ClearScreen();
-        lobbyUI.SetActive(true);
+        roomUI.SetActive(true);
     }
 }

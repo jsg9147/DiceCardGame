@@ -25,12 +25,13 @@ public class PhotonManager : MonoBehaviourPunCallbacks
     public GameObject RoomPanel;
     public TMP_Text ListText;
     public TMP_Text RoomInfoText;
-    public Text[] ChatText;
+    public TMP_Text[] ChatText;
     public TMP_InputField ChatInput;
 
     [Header("ETC")]
     public Text StatusText;
     public PhotonView PV;
+    public GameObject firebaseManager;
 
     List<RoomInfo> myList = new List<RoomInfo>();
     int currentPage = 1, maxPage, multiple;
@@ -82,7 +83,11 @@ public class PhotonManager : MonoBehaviourPunCallbacks
 
 
     #region 서버연결
-    void Awake() => Screen.SetResolution(960, 540, false);
+    void Awake()
+    {
+        Screen.SetResolution(960, 540, false);
+        PhotonNetwork.AutomaticallySyncScene = true;
+    }
 
     void Update()
     {
@@ -97,11 +102,7 @@ public class PhotonManager : MonoBehaviourPunCallbacks
     public override void OnJoinedLobby()
     {
         UIManager.instance.LobbyScreen();
-        /*
-        LobbyPanel.SetActive(true);
-        RoomPanel.SetActive(false);
-        */
-        PhotonNetwork.LocalPlayer.NickName = "임시 닉네임"; // NickNameInput.text;
+        PhotonNetwork.LocalPlayer.NickName = firebaseManager.GetComponent<FirebaseManager>().GetUsername();
         WelcomeText.text = PhotonNetwork.LocalPlayer.NickName + "님 환영합니다";
         myList.Clear();
     }
@@ -110,25 +111,29 @@ public class PhotonManager : MonoBehaviourPunCallbacks
 
     public override void OnDisconnected(DisconnectCause cause)
     {
-        UIManager.instance.RoomScreen();
-        /*
-        LobbyPanel.SetActive(false);
-        RoomPanel.SetActive(false);
-        */
+        UIManager.instance.LoginScreen();
     }
     #endregion
 
 
     #region 방
-    public void CreateRoom() => PhotonNetwork.CreateRoom(RoomInput.text == "" ? "Room" + Random.Range(0, 100) : RoomInput.text, new RoomOptions { MaxPlayers = 4 });
+    public void CreateRoom()
+    {
+        PhotonNetwork.CreateRoom(RoomInput.text == "" ? "Room" + Random.Range(0, 100) : RoomInput.text, new RoomOptions { MaxPlayers = 4 });
+        UIManager.instance.RoomScreen();
+    }
 
     public void JoinRandomRoom() => PhotonNetwork.JoinRandomRoom();
 
-    public void LeaveRoom() => PhotonNetwork.LeaveRoom();
+    public void LeaveRoom()
+    {
+        PhotonNetwork.LeaveRoom();
+        UIManager.instance.LobbyScreen();
+    }
 
     public override void OnJoinedRoom()
     {
-        RoomPanel.SetActive(true);
+        UIManager.instance.RoomScreen();
         RoomRenewal();
         ChatInput.text = "";
         for (int i = 0; i < ChatText.Length; i++) ChatText[i].text = "";

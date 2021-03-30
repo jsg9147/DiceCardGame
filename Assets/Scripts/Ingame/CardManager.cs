@@ -15,6 +15,7 @@ public class CardManager : MonoBehaviour
     [SerializeField] List<Card> myCards;
     [SerializeField] List<Card> otherCards;
     [SerializeField] Transform cardSpawnPoint;
+    [SerializeField] Transform otherCardSpawnPoint;
     [SerializeField] Transform myCardLeft;
     [SerializeField] Transform myCardRight;
     [SerializeField] Transform otherCardLeft;
@@ -25,6 +26,7 @@ public class CardManager : MonoBehaviour
     Card selectCard;
     bool isMyCardDrag;
     bool onMyCardArea;
+    int myPutCount;
     enum EcardState { Nothing, CanMouseOver, CanMouseDrag }
 
     public Item PopItem()
@@ -133,6 +135,7 @@ public class CardManager : MonoBehaviour
         if (!onMyCardArea)
         {
             selectCard.MoveTransform(new PRS(Utils.MousePos, Utils.QI, selectCard.originPRS.scale), false);
+            EntityManager.Inst.InsertMyEmptyEntity(Utils.MousePos.x);
         }
     }
 
@@ -143,15 +146,57 @@ public class CardManager : MonoBehaviour
         onMyCardArea = Array.Exists(hits, x => x.collider.gameObject.layer == layer);
     }
 
+    public bool TryPutCard(bool isMine)
+    {
+        if (isMine && myPutCount >= 1) // 카드를 이미 냈으면 카드를 못내게 하는것 지금은 1장 추후 삭제예정
+            return false;
+
+        if (!isMine && otherCards.Count <= 0) // 다른사람의 카드 카운트
+            return false;
+
+        Card card = isMine ? selectCard : otherCards[Random.Range(0, otherCards.Count)];
+        var spawnPos = isMine ? Utils.MousePos : otherCardSpawnPoint.position;
+        var targetCards = isMine ? myCards : otherCards;
+
+        if(EntityManager.Inst.SpawnEntity(isMine, card.item, spawnPos))
+        {
+            targetCards.Remove(card);
+            card.transform.DOKill();
+            DestroyImmediate(card.gameObject);
+            if(isMine)
+            {
+                selectCard = null;
+                myPutCount++;
+            }
+            CardAlignment(isMine);
+            return true;
+        }
+
+        else
+        {
+            targetCards.ForEach(x => x.GetComponent<Order>().SetMostFrontOrder(false));
+            CardAlignment(isMine);
+            return false;
+        }
+    }
+
+    void OnTurnStarted(bool myTurn)
+    {
+        if (myTurn)
+            myPutCount = 0;
+    }
+
     private void Start()
     {
         SetupItemBuffer();
         TurnManager.OnAddCard += AddCard;
+        TurnManager.OnTurnStarted += OnTurnStarted;
     }
 
     private void OnDestroy()
     {
         TurnManager.OnAddCard -= AddCard;
+        TurnManager.OnTurnStarted -= OnTurnStarted;
     }
 
     private void Update()
@@ -195,6 +240,11 @@ public class CardManager : MonoBehaviour
 
         if (ecardState != EcardState.CanMouseDrag)
             return;
+
+        if (onMyCardArea)
+            EntityManager.Inst.RemoveMyEmptyEntity();
+        else
+            TryPutCard(true);
     }
 
     void EnlargeCard(bool isEnlarge, Card card)
@@ -215,10 +265,10 @@ public class CardManager : MonoBehaviour
         if (TurnManager.Inst.isLoading)
             ecardState = EcardState.Nothing;
 
-        else if (!TurnManager.Inst.myTurn)
+        else if (!TurnManager.Inst.myTurn || myPutCount == 1 || EntityManager.Inst.IsFullMyEntities) // 카드가 최대치 나가있거나 한턴 사용 카드 다 썼거나
             ecardState = EcardState.CanMouseOver;
 
-        else if (TurnManager.Inst.myTurn)
+        else if (TurnManager.Inst.myTurn && myPutCount == 0)
             ecardState = EcardState.CanMouseDrag;
     }
 

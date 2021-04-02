@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class EntityManager : MonoBehaviour
 {
@@ -11,8 +12,10 @@ public class EntityManager : MonoBehaviour
     }
 
     [SerializeField] GameObject entityPrefab;
+    [SerializeField] GameObject damagePrefab;
     [SerializeField] List<Entity> myEntities;
     [SerializeField] List<Entity> otherEntities;
+    [SerializeField] GameObject TargetPicker;
     [SerializeField] Entity myEmptyEntity;
     [SerializeField] Entity myBossEntity;
     [SerializeField] Entity otherBossEntity;
@@ -20,9 +23,13 @@ public class EntityManager : MonoBehaviour
     const int MAX_ENTITY_COUNT = 6;
     public bool IsFullMyEntities => myEntities.Count >= MAX_ENTITY_COUNT && !ExistMyEmptyEntity;
     bool IsFullOtherEntities => otherEntities.Count >= MAX_ENTITY_COUNT;
+    bool ExistTargetPickEntity => targetPickEntity != null;
     bool ExistMyEmptyEntity => myEntities.Exists(x => x == myEmptyEntity);
     int MyEmptyEntityIndex => myEntities.FindIndex(x => x == myEmptyEntity);
+    bool CanMouseInput => TurnManager.Inst.myTurn && !TurnManager.Inst.isLoading;
 
+    Entity selectEntity;
+    Entity targetPickEntity;
     WaitForSeconds delay1 = new WaitForSeconds(1);
 
 
@@ -38,8 +45,15 @@ public class EntityManager : MonoBehaviour
 
     void OnTurnStarted(bool myTurn)
     {
+        AttackableReset(myTurn);
+
         if (!myTurn)
             StartCoroutine(AICo());
+    }
+
+    private void Update()
+    {
+        ShowTargetPicker(ExistTargetPickEntity);
     }
 
     IEnumerator AICo()
@@ -123,4 +137,97 @@ public class EntityManager : MonoBehaviour
 
         return true;
     }
+
+    public void EntityMouseDown(Entity entity)
+    {
+        if (!CanMouseInput)
+            return;
+
+        selectEntity = entity;
+    }
+
+    public void EntityMouseUp()
+    {
+        if (!CanMouseInput)
+            return;
+
+        selectEntity = null;
+        targetPickEntity = null;
+    }
+
+    public void EntityMouseDrag()
+    {
+        if (!CanMouseInput || selectEntity == null)
+            return;
+
+        // ohter 타겟 엔티티 찾기
+        bool existTarget = false;
+        foreach(var hit in Physics2D.RaycastAll(Utils.MousePos, Vector3.forward))
+        {
+            Entity entity = hit.collider?.GetComponent<Entity>();
+            if(entity != null && !entity.isMine && selectEntity.attackable)
+            {
+                targetPickEntity = entity;
+                existTarget = true;
+                break;
+            }
+        }
+        if (!existTarget)
+            targetPickEntity = null;
+    }
+
+    public void EntityMouseUP()
+    {
+        if (!CanMouseInput)
+            return;
+
+        // selectEntity, targetPickEntity 둘다 존재하면 공격한다. 바로 null, null 로 만든다.
+        if (selectEntity && targetPickEntity && selectEntity.attackable)
+            Attack(selectEntity, targetPickEntity);
+
+        selectEntity = null;
+        targetPickEntity = null;
+    }
+
+    private void ShowTargetPicker(bool isShow)
+    {
+        TargetPicker.SetActive(isShow);
+        if (ExistTargetPickEntity)
+            TargetPicker.transform.position = targetPickEntity.transform.position;
+    }
+
+    void Attack(Entity attacker, Entity defender)
+    {
+        // _attacker가 _defender의 위치로 이동하다 원래 위치로 돌아온다, 이때 order가 제일 높다
+        attacker.attackable = false;
+        attacker.GetComponent<Order>().SetMostFrontOrder(true);        
+
+        // 시퀀스 개념 좀더 정의 필요
+        Sequence sequence = DOTween.Sequence()
+            .Append(attacker.transform.DOMove(defender.originPos, 0.4f)).SetEase(Ease.InSine)
+            .AppendCallback(() =>
+            {
+                attacker.Damaged(defender.attack);
+                defender.Damaged(attacker.attack);
+                attacker.GetComponent<Order>().SetMostFrontOrder(false);
+                SpawnDamage(defender.attack, attacker.transform);
+                SpawnDamage(attacker.attack, defender.transform);
+            })
+            .Append(attacker.transform.DOMove(attacker.originPos, 0.4f)).SetEase(Ease.OutSine)
+            .OnComplete(() => { }); //죽음 처리
+    }
+
+    public void AttackableReset(bool isMine)
+    {
+        var targetEntities = isMine ? myEntities : otherEntities;
+        targetEntities.ForEach(x => x.attackable = true);
+    }
+
+    void SpawnDamage(int damage, Transform tr)
+    {
+        var damageComponent = Instantiate(damagePrefab).GetComponent<Damage>();
+        damageComponent.SetupTransform(tr);
+        damageComponent.Damaged(damage);
+    }
+
 }

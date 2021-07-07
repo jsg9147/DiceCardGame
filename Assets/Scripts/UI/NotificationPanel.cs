@@ -18,8 +18,9 @@ public class NotificationPanel : MonoBehaviour
             .Append(transform.DOScale(Vector3.zero, 0.3f).SetEase(Ease.InOutQuad));
     }
 
+    // 유니티에서 직접 실행 가능하도록 하는 방법
     [ContextMenu("ScaleOne")]
-    void ScaleOne() => transform.localScale = Vector3.zero;
+    void ScaleOne() => transform.localScale = Vector3.one;
 
     [ContextMenu("ScaleZero")]
     public void ScaleZero() => transform.localScale = Vector3.zero;

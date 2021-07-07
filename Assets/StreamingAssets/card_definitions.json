@@ -1,0 +1,72 @@
+[
+  {
+    "cardId": 0,
+    "cardType": "pawn",
+    "name": "pawn",
+    "spriteName": "pawn",
+    "cost": 0,
+    "atk": 0,
+    "def": 0,
+    "explanation" : "이것이 폰"
+  },
+  {
+    "cardId": 1,
+    "cardType": "queen",
+    "name": "queen",
+    "spriteName": "queen",
+    "cost": 0,
+    "atk": 0,
+    "def": 0,
+    "explanation" : "이것이 퀸"
+  },
+  {
+    "cardId": 2,
+    "cardType": "knight",
+    "name": "knight",
+    "spriteName": "knight",
+    "cost": 0,
+    "atk": 0,
+    "def": 0,
+    "explanation" : "이것이 나이트"
+  },
+  {
+    "cardId": 3,
+    "cardType": "rook",
+    "name": "rook",
+    "spriteName": "rook",
+    "cost": 0,
+    "atk": 0,
+    "def": 0,
+    "explanation" : "이것이 룩"
+  },
+  {
+    "cardId": 4,
+    "cardType": "bishop",
+    "name": "bishop",
+    "spriteName": "bishop",
+    "cost": 0,
+    "atk": 0,
+    "def": 0,
+    "explanation" : "이것이 비숍"
+  },
+  {
+    "cardId": 5,
+    "cardType": "test",
+    "name": "test",
+    "spriteName": "test",
+    "cost": 0,
+    "atk": 0,
+    "def": 0,
+    "explanation" : "테스트용!"
+  },
+  {
+    "cardId": 6,
+    "cardType": "king",
+    "name": "king",
+    "spriteName": "king",
+    "cost": 0,
+    "atk": 0,
+    "def": 0,
+    "explanation" : "왕!!"
+  }
+]

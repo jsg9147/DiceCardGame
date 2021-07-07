@@ -1,37 +1,47 @@
 {
+  "project_info": {
+    "project_number": "985336800133",
+    "firebase_url": "https://dicecardgame-default-rtdb.firebaseio.com",
+    "project_id": "dicecardgame",
+    "storage_bucket": "dicecardgame.appspot.com"
+  },
   "client": [
     {
-      "services": {
-        "appinvite_service": {
-          "status": 1
-        }, 
-        "analytics_service": {
-          "status": 0
+      "client_info": {
+        "mobilesdk_app_id": "1:985336800133:android:5b3652b724007359679aec",
+        "android_client_info": {
+          "package_name": "com.MSGgames.DiceCardGame"
         }
-      }, 
+      },
       "oauth_client": [
         {
-          "client_id": "985336800133-appaldqs1o88q46bplms6sqkhq9gulpq.apps.googleusercontent.com"
+          "client_id": "985336800133-ucne29k9qvdaoauhbhv18mennjvh9our.apps.googleusercontent.com",
+          "client_type": 3
         }
-      ], 
+      ],
       "api_key": [
         {
-          "current_key": "AIzaSyCbch1ZmPO9lXVlpzBmJjRVixm9wfxYWHQ"
+          "current_key": "AIzaSyAgszg0FK9Hvlir6JIqmZj9mO5TXCkr_8g"
         }
-      ], 
-      "client_info": {
-        "mobilesdk_app_id": "1:985336800133:ios:29759cbb442b4146679aec", 
-        "android_client_info": {
-          "package_name": "com.MsgGames.DiceCardGame"
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "985336800133-ucne29k9qvdaoauhbhv18mennjvh9our.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "985336800133-appaldqs1o88q46bplms6sqkhq9gulpq.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.MsgGames.DiceCardGame"
+              }
+            }
+          ]
         }
       }
     }
-  ], 
-  "configuration_version": "1", 
-  "project_info": {
-    "storage_bucket": "dicecardgame.appspot.com", 
-    "project_id": "dicecardgame", 
-    "firebase_url": "https://dicecardgame-default-rtdb.firebaseio.com", 
-    "project_number": "985336800133"
-  }
+  ],
+  "configuration_version": "1"
 }

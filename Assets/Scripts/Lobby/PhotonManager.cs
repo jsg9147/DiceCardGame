@@ -11,9 +11,6 @@ using Hashtable = ExitGames.Client.Photon.Hashtable;
 
 public class PhotonManager : MonoBehaviourPunCallbacks
 {
-    [Header("DisconnectPanel")]
-    public InputField NickNameInput;
-
     [Header("LobbyPanel")]
     public GameObject LobbyPanel;
     public InputField RoomInput;
@@ -33,7 +30,6 @@ public class PhotonManager : MonoBehaviourPunCallbacks
     [Header("ETC")]
     public Text StatusText;
     public PhotonView PV;
-    public GameObject firebaseManager;
 
     [Header("InGame")]
     int actorNum;
@@ -106,11 +102,12 @@ public class PhotonManager : MonoBehaviourPunCallbacks
     public override void OnConnectedToMaster() => PhotonNetwork.JoinLobby();
 
     public override void OnJoinedLobby()
-    {
-        UIManager.instance.LobbyScreen();
-        PhotonNetwork.LocalPlayer.NickName = firebaseManager.GetComponent<FirebaseManager>().GetUsername();
+    {      
+        // 닉네임 얻어오는 과정
+        // PhotonNetwork.LocalPlayer.NickName = firebaseManager.GetComponent<FirebaseManager>().GetUsername();
         WelcomeText.text = PhotonNetwork.LocalPlayer.NickName + "님 환영합니다";
         myList.Clear();
+        UIManager.instance.LobbyScreen();
     }
 
     public void Disconnect() => PhotonNetwork.Disconnect();
